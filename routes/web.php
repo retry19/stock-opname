@@ -11,6 +11,7 @@ use App\Http\Controllers\{
     PembelianDetailController,
     PenjualanController,
     PenjualanDetailController,
+    ReportController,
     SettingController,
     SupplierController,
     UserController,
@@ -87,6 +88,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
         Route::get('/laporan/data/{awal}/{akhir}', [LaporanController::class, 'data'])->name('laporan.data');
         Route::get('/laporan/pdf/{awal}/{akhir}', [LaporanController::class, 'exportPDF'])->name('laporan.export_pdf');
+
+        Route::get('/report', [ReportController::class, 'index'])->name('report.index');
+        Route::post('/report', [ReportController::class, 'store'])->name('report.store');
+        Route::get('/report/list', [ReportController::class, 'list'])->name('report.list');
+        Route::get('/report/create', [ReportController::class, 'create'])->name('report.create');
+        Route::get('/report/{id}/print', [ReportController::class, 'print'])->name('report.print');
 
         Route::get('/user/data', [UserController::class, 'data'])->name('user.data');
         Route::resource('/user', UserController::class);
